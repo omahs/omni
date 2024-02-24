@@ -7,6 +7,7 @@ import (
 	"github.com/omni-network/omni/lib/errors"
 	"github.com/omni-network/omni/lib/log"
 	"github.com/omni-network/omni/test/e2e/netman"
+	"github.com/omni-network/omni/test/e2e/netman/pingpong"
 	"github.com/omni-network/omni/test/e2e/send"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -14,7 +15,7 @@ import (
 	ethtypes "github.com/ethereum/go-ethereum/core/types"
 )
 
-func StartSendingXMsgs(ctx context.Context, netman netman.Manager, sender send.Sender, batches ...int) <-chan error {
+func StartSendingXMsgs(ctx context.Context, netman netman.Manager, sender send.Sender, pp pingpong.XDapp, batches ...int) <-chan error {
 	log.Info(ctx, "Generating cross chain messages async", "batches", batches)
 
 	ctx, cancel := context.WithTimeout(ctx, 2*time.Minute)
@@ -23,7 +24,7 @@ func StartSendingXMsgs(ctx context.Context, netman netman.Manager, sender send.S
 	go func() {
 		for i, count := range batches {
 			log.Debug(ctx, "Sending xmsgs", "batch", i, "count", count)
-			err := SendXMsgs(ctx, netman, sender, count)
+			err := SendXMsgs(ctx, netman, sender, pp, count)
 			if ctx.Err() != nil {
 				errChan <- ctx.Err()
 				return
@@ -40,7 +41,7 @@ func StartSendingXMsgs(ctx context.Context, netman netman.Manager, sender send.S
 }
 
 // SendXMsgs sends <count> xmsgs from every chain to every other chain, then waits for them to be mined.
-func SendXMsgs(ctx context.Context, netman netman.Manager, sender send.Sender, count int) error {
+func SendXMsgs(ctx context.Context, netman netman.Manager, sender send.Sender, pp pingpong.XDapp, count int) error {
 	type sentTuple struct {
 		ChainID uint64
 		TX      *ethtypes.Transaction
@@ -50,6 +51,42 @@ func SendXMsgs(ctx context.Context, netman netman.Manager, sender send.Sender, c
 
 	allSends := make(chan sentTuple)
 	var expect int
+
+	for _, edge := range pp.GetAllEdges() {
+		to := netman.Portals()[edge.To]
+		from := netman.Portals()[edge.From]
+
+		// TODO: also need the inverse of the above
+
+		for i := 0; i < count; i++ {
+			expect++
+			// Send async so whole batch included in same block. Important for testing.
+
+			// TODO: should put this in a function of its own taking in from and to
+			go func() {
+				txOpts, backend, err := sender.BindOpts(ctx, from.Chain.ID)
+				if err != nil {
+					allSends <- sentTuple{ChainID: from.Chain.ID, Err: errors.Wrap(err, "deploy opts")}
+					return
+				}
+
+				h, err := backend.BlockNumber(ctx)
+				if err != nil {
+					allSends <- sentTuple{ChainID: from.Chain.ID, Err: errors.Wrap(err, "block number")}
+					return
+				}
+
+				tx, err := xcall(txOpts, from, to.Chain.ID)
+				allSends <- sentTuple{
+					ChainID: from.Chain.ID,
+					TX:      tx,
+					SentAt:  h,
+					Err:     err,
+				}
+			}()
+		}
+
+	}
 	for fromChainID, from := range netman.Portals() {
 		for _, to := range netman.Portals() {
 			if from.Chain.ID == to.Chain.ID {

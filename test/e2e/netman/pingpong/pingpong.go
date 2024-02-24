@@ -127,6 +127,10 @@ func (d *XDapp) StartAllEdges(ctx context.Context, count uint64) error {
 	return nil
 }
 
+func (d *XDapp) GetAllEdges () []Edge {
+	return d.edges
+}
+
 // WaitDone waits for all ping pongs to be done.
 // Note this doesn't work on anvil since it doesn't support subscriptions.
 func (d *XDapp) WaitDone(ctx context.Context) error {
