@@ -87,6 +87,7 @@ services:
       # Flags not available via config.toml
       - --nat=extip:{{ .AdvertisedIP }}
       - --metrics
+      - --pprof
       {{ if .IsArchive }}- --gcmode=archive{{ end }}
     ports:
       - {{ if $.BindAll }}8551:{{end}}8551
