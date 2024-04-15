@@ -141,10 +141,14 @@ export type XMsg = {
 /** XReceipt represents a cross-chain receipt. */
 export type XReceipt = {
   __typename?: 'XReceipt';
+  /** XBlock message was emitted in */
+  Block: XBlock;
   /** Destination chain ID as per https://chainlist.org */
   DestChainID: Scalars['BigInt']['output'];
   /** Gas used for the cross-chain message */
   GasUsed: Scalars['BigInt']['output'];
+  /** Messages associated wit this receipt */
+  Messages: Array<XMsg>;
   /** Address of the relayer */
   RelayerAddress: Scalars['Address']['output'];
   /** Source chain ID as per https://chainlist.org */

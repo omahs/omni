@@ -65,6 +65,21 @@
     line-height: 0.625rem;
     text-transform: uppercase;
   }
+
+  /* overwriting original class to keep naming conventions consistent */
+  .bg-positive {
+    @apply bg-bg-positive !important; 
+  }
+
+  .text-positive {
+    color: var(--color-text-positive);
+  }
 }
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .table-highlight {
+    background-color: #FBFBFC05;
+  }
+}

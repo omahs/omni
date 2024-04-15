@@ -12,6 +12,8 @@ import {
 } from '@remix-run/react'
 import { Client, Provider, cacheExchange, fetchExchange } from 'urql'
 import { useEnv } from './lib/use-env'
+import Navbar from './components/shared/navbar'
+import { Footer } from './components/shared/footer'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }]
 export type LoaderData = SerializeFrom<typeof loader>
@@ -25,15 +27,17 @@ export function loader() {
 
 function App() {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="bg-surface ">
+        <Navbar />
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

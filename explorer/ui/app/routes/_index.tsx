@@ -1,8 +1,7 @@
 import type { MetaFunction } from '@remix-run/node'
 import XBlockDataTable from '~/components/home/blockDataTable'
 import XMsgDataTable from '~/components/home/messageDataTable'
-import { Footer } from '~/components/shared/footer'
-import Navbar from '~/components/shared/navbar'
+import Overview from '~/components/home/overview'
 
 export const meta: MetaFunction = () => {
   return [
@@ -13,21 +12,14 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div>
-      <Navbar />
-      <div className="flex">
-        <div className="grow"></div>
-        <div className="flex-auto w-full max-w-screen-xl grid grid-cols-2 gap-4 place-items-stretch m3">
-          <div className="flex-auto">
-            <XBlockDataTable />
-          </div>
-          <div className="flex-auto">
-            <XMsgDataTable />
-          </div>
+    <div className="px-20">
+      <div className="flex h-full w-full flex-col">
+        <Overview />
+        <div className="w-full">
+          <XMsgDataTable />
         </div>
         <div className="grow"></div>
       </div>
-      <Footer />
     </div>
   )
 }
