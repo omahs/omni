@@ -26,8 +26,8 @@ const Overview: React.FC<Props> = ({}) => {
     <div className="mb-12 mt-8">
       <h5 className="text-default">Omni X-Explorer</h5>
       <div className="flex flex-row flex-wrap gap-3 mt-3">
-        {cards.map(card => (
-          <Card data={card} />
+        {cards.map((card, i) => (
+          <Card key={`card-${i}`} data={card} />
         ))}
       </div>
     </div>

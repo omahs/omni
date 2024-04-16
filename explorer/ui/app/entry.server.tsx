@@ -12,6 +12,7 @@ import { RemixServer } from '@remix-run/react'
 import { isbot } from 'isbot'
 import { renderToPipeableStream } from 'react-dom/server'
 import { Counter, collectDefaultMetrics, register } from 'prom-client'
+import { Client, fetchExchange, cacheExchange } from 'urql'
 
 register.clear() // prevents multiple counter instantiation
 
@@ -135,3 +136,9 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY)
   })
 }
+
+
+export const gqlClient = new Client({
+  url: process.env.GRAPHQL_URL || '',
+  exchanges: [fetchExchange, cacheExchange],
+})

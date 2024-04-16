@@ -14,6 +14,7 @@ import { Client, Provider, cacheExchange, fetchExchange } from 'urql'
 import { useEnv } from './lib/use-env'
 import Navbar from './components/shared/navbar'
 import { Footer } from './components/shared/footer'
+import { gqlClient } from './entry.server'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }]
 export type LoaderData = SerializeFrom<typeof loader>
@@ -24,6 +25,9 @@ export function loader() {
   }
   return json({ ENV })
 }
+
+
+
 
 function App() {
   return (
@@ -50,13 +54,9 @@ export default function AppWithProviders() {
   useLoaderData<typeof loader>()
 
   const ENV = useEnv()
-  let client = new Client({
-    url: ENV.GRAPHQL_URL ?? '',
-    exchanges: [fetchExchange, cacheExchange],
-  })
-  console.log(ENV.GRAPHQL_URL)
+
   return (
-    <Provider value={client}>
+    <Provider value={gqlClient}>
       <App />
     </Provider>
   )
