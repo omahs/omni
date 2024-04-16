@@ -5,7 +5,7 @@ import Logo from './logo'
 
 export default function Navbar() {
   return (
-    <header className="static m-auto border-none py-3 px-8">
+    <header className="static border-none py-3 px-8">
       <div className="w-full flex">
         <div className="px-4 flex gap-12 content-center grid-flow-row">
           <a href="/" className="m-auto">

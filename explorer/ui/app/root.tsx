@@ -31,16 +31,17 @@ export function loader() {
 
 function App() {
   return (
-    <html lang="en" data-theme="dark">
+    <html lang="en" data-theme="dark" className='h-full'>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="bg-surface ">
+      <body className="bg-surface flex flex-col justify-start content-start  h-full">
         <Navbar />
         <Outlet />
+        <div className='grow'></div>
         <Footer />
         <ScrollRestoration />
         <Scripts />
