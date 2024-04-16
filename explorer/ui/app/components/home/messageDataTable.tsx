@@ -5,8 +5,11 @@ import { ColumnDef } from '@tanstack/react-table'
 import SimpleTable from '../shared/simpleTable'
 import { GetXMessagesInRange } from '../queries/messages'
 import { useLoaderData } from '@remix-run/react'
-import { dateFormatter } from '~/lib/formatting'
+import { dateFormatter, hashShortener } from '~/lib/formatting'
 import Tag from '../shared/tag'
+import RollupIcon from '../shared/rollupIcon'
+import { Link } from '@remix-run/react'
+import LongArrow from '~/assets/images/LongArrow.svg'
 
 export async function loader() {
   return json<XMsg[]>(new Array())
@@ -64,12 +67,22 @@ export default function XMsgDataTable() {
         ...columnConfig,
         accessorKey: 'offset',
         header: () => <span>Nounce</span>,
+        cell: (value: any) => (
+          <Link to="/" className="link font-bold text-b-sm">
+            {value.getValue()}
+          </Link>
+        ),
       },
       {
         ...columnConfig,
         accessorKey: 'timeStamp',
-        accessorFn: row => dateFormatter(row.timeStamp),
         header: () => <span>Age</span>,
+        cell: (value: any) => (
+          <span className="text-subtlest font-bold text-b-xs">
+            {' '}
+            {dateFormatter(value.getValue())}
+          </span>
+        ),
       },
       {
         ...columnConfig,
@@ -81,38 +94,63 @@ export default function XMsgDataTable() {
         ...columnConfig,
         accessorKey: 'srcLogoUrl',
         header: () => <span></span>,
-        cell: (value: any) => <img src={value.getValue()} alt="Logo" />,
+        cell: (value: any) => <RollupIcon name="arbiscan" />,
       },
       {
         ...columnConfig,
         accessorKey: 'fromAddress',
         header: () => <span>Address</span>,
+        cell: (value: any) => (
+          <Link to="/" className="link">
+            <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
+            ico
+          </Link>
+        ),
       },
       {
         ...columnConfig,
         accessorKey: 'blockHash',
         header: () => <span>Block Hash</span>,
+        cell: (value: any) => (
+          <Link to="/" className="link">
+            <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
+            ico
+          </Link>
+        ),
       },
       {
         ...columnConfig,
         accessorKey: 'Empty',
         header: () => <span></span>,
+        cell: (value: any) => <img src={LongArrow} alt="" />,
       },
       {
         ...columnConfig,
         accessorKey: 'destLogoUrl',
         header: () => <span></span>,
-        cell: (value: any) => <img src={value.getValue()} alt="Logo" />,
+        cell: (value: any) => <RollupIcon name="arbiscan" />,
       },
       {
         ...columnConfig,
         accessorKey: 'destAddress',
         header: () => <span>Address</span>,
+        cell: (value: any) => (
+          <Link to="/" className="link">
+            <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
+            ico
+          </Link>
+        ),
       },
       {
         ...columnConfig,
         accessorKey: 'txHash',
         header: () => <span>Tx Hash</span>,
+        cell: (value: any) => (
+          <Link to="/" className="link">
+            <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
+            ico
+          </Link>
+        ),
       },
     ],
     [],

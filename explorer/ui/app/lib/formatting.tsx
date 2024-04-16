@@ -31,3 +31,7 @@ export const dateFormatter = (date: Date) => {
 
   return txsTimestamp.toLocaleString()
 }
+
+export const hashShortener = (hash: string) => {
+  return `${hash.substring(0, 8)}...${hash.substring(hash.length - 5)}`
+}

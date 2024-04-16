@@ -32,6 +32,9 @@ export default {
         'overlay':'var(--color-overlay)',
 
         'bg-positive': 'var(--color-bg-positive)',
+        'bg-critical': 'var(--color-bg-critical)',
+        'bg-subtle': 'var(--color-bg-subtle)',
+        'bg-secondary': 'var(--color-bg-secondary)',
       },
     },
   },
@@ -69,6 +72,9 @@ export default {
           '--color-overlay': '#FEFEFE',
 
           '--color-bg-positive': '#2E7B4126',
+          '--color-bg-critical': '#BB372B26',
+          '--color-bg-subtle':'#F7F7F7',
+          '--color-bg-secondary':'#FFE316',
         },
         dark: {
           // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -100,6 +106,9 @@ export default {
           '--color-overlay': '#394866',
 
           '--color-bg-positive': '#2E7B4166',
+          '--color-bg-critical': '#BB372B66',
+          '--color-bg-subtle':'#FBFBFC1F',
+          '--color-bg-secondary':'#FFE316',
 
         },
       },

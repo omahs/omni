@@ -24,7 +24,7 @@ const Overview: React.FC<Props> = ({}) => {
   ]
   return (
     <div className="mb-12 mt-8">
-      <h5 className="text-default">Overview</h5>
+      <h5 className="text-default">Omni X-Explorer</h5>
       <div className="flex flex-row flex-wrap gap-3 mt-3">
         {cards.map(card => (
           <Card data={card} />
