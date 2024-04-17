@@ -65,7 +65,7 @@ export default function XMsgDataTable() {
     () => [
       {
         ...columnConfig,
-        accessorKey: 'offset',
+        accessorKey: 'StreamOffset',
         header: () => <span>Nounce</span>,
         cell: (value: any) => (
           <Link to="/" className="link font-bold text-b-sm">
@@ -92,9 +92,9 @@ export default function XMsgDataTable() {
       },
       {
         ...columnConfig,
-        accessorKey: 'srcLogoUrl',
+        accessorKey: 'SourceChainID',
         header: () => <span></span>,
-        cell: (value: any) => <RollupIcon name="arbiscan" />,
+        cell: (value: any) => <RollupIcon chainId={value.getValue()} />,
       },
       {
         ...columnConfig,
@@ -103,18 +103,18 @@ export default function XMsgDataTable() {
         cell: (value: any) => (
           <Link to="/" className="link">
             <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
-            ico
+            <span className="icon-external-link" />
           </Link>
         ),
       },
       {
         ...columnConfig,
-        accessorKey: 'blockHash',
+        accessorKey: 'BlockHash',
         header: () => <span>Block Hash</span>,
         cell: (value: any) => (
           <Link to="/" className="link">
             <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
-            ico
+            <span className="icon-external-link" />
           </Link>
         ),
       },
@@ -126,29 +126,29 @@ export default function XMsgDataTable() {
       },
       {
         ...columnConfig,
-        accessorKey: 'destLogoUrl',
+        accessorKey: 'DestChainID',
         header: () => <span></span>,
-        cell: (value: any) => <RollupIcon name="arbiscan" />,
+        cell: (value: any) => <RollupIcon chainId={value.getValue()} />,
       },
       {
         ...columnConfig,
-        accessorKey: 'destAddress',
+        accessorKey: 'DestAddress',
         header: () => <span>Address</span>,
         cell: (value: any) => (
           <Link to="/" className="link">
             <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
-            ico
+            <span className="icon-external-link" />
           </Link>
         ),
       },
       {
         ...columnConfig,
-        accessorKey: 'txHash',
+        accessorKey: 'TxHash',
         header: () => <span>Tx Hash</span>,
         cell: (value: any) => (
           <Link to="/" className="link">
             <span className="font-bold text-b-sm">{hashShortener(value.getValue())}</span>
-            ico
+            <span className="icon-external-link" />
           </Link>
         ),
       },
@@ -174,16 +174,8 @@ export default function XMsgDataTable() {
             />
             <SearchBar placeholder={searchPlaceholder} />
           </div>
-          <ChainDropdown
-            placeholder="Select source"
-            label="From"
-            options={sourceChainList}
-          />
-          <ChainDropdown
-            placeholder="Select destination"
-            label="To"
-            options={sourceChainList}
-          />
+          <ChainDropdown placeholder="Select source" label="From" options={sourceChainList} />
+          <ChainDropdown placeholder="Select destination" label="To" options={sourceChainList} />
         </div>
       </div>
       <div>

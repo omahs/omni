@@ -1,4 +1,8 @@
 export const dateFormatter = (date: Date) => {
+  if (date instanceof Date === false) {
+    return date
+  }
+
   const currentTimestamp = new Date()
   const txsTimestamp = new Date(date)
 
@@ -33,5 +37,8 @@ export const dateFormatter = (date: Date) => {
 }
 
 export const hashShortener = (hash: string) => {
+  if (!hash) {
+    return hash
+  }
   return `${hash.substring(0, 8)}...${hash.substring(hash.length - 5)}`
 }

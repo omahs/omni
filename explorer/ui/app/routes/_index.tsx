@@ -7,6 +7,9 @@ import { gqlClient } from '~/entry.server'
 import { useRevalidator } from '@remix-run/react'
 import { useInterval } from '~/hooks/useInterval'
 import { xblockcount } from '~/components/queries/block'
+import { xmsgrange } from '~/components/queries/messages'
+import { XMsg } from '~/graphql/graphql'
+import { supportedchains } from '~/components/queries/chains'
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,46 +19,26 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const res = await gqlClient.query(xblockcount, {})
+  // const res = await gqlClient.query(xblockcount, {})
+
+  const [xmsgRes, supportedChainsRes] = await Promise.all([
+    gqlClient.query(xmsgrange, {
+      from: '0x' + (0).toString(16),
+      to: '0x' + (1000).toString(16),
+    }),
+    gqlClient.query(supportedchains, {}),
+  ])
+
+  const supportedChains = supportedChainsRes.data?.supportedchains || []
+  const xmsgs = xmsgRes?.data?.xmsgrange ?? []
+
+  console.log('Supported chains', supportedChainsRes.data?.supportedchains)
+  console.log('xmsgData', xmsgRes?.data?.xmsgrange.length)
 
   const pollData = async () => {
     return json({
-      count: Number(res?.data?.xblockcount || '0x'),
-      xmsgs: [
-        {
-          offset: 335,
-          timeStamp: new Date(),
-          status: 'Success',
-          srcLogoUrl: 'https://picsum.photos/24/24',
-          fromAddress: '0xbb0xbb23525f97',
-          blockHash: '0xbb0xbb23525f97',
-          destLogoUrl: 'https://picsum.photos/24/24',
-          destAddress: '0xbb0xbb23525f97',
-          txHash: '0xbb0xbb23525f97',
-        },
-        {
-          offset: 335,
-          timeStamp: new Date(),
-          status: 'Failure',
-          srcLogoUrl: 'https://picsum.photos/24/24',
-          fromAddress: '0xbb0xbb23525f97',
-          blockHash: '0xbb0xbb23525f97',
-          destLogoUrl: 'https://picsum.photos/24/24',
-          destAddress: '0xbb0xbb23525f97',
-          txHash: '0xbb0xbb23525f97',
-        },
-        {
-          offset: 335,
-          timeStamp: new Date(),
-          status: 'Success',
-          srcLogoUrl: 'https://picsum.photos/24/24',
-          fromAddress: '0xbb0xbb23525f97',
-          blockHash: '0xbb0xbb23525f97',
-          destLogoUrl: 'https://picsum.photos/24/24',
-          destAddress: '0xbb0xbb23525f97',
-          txHash: '0xbb0xbb23525f97',
-        },
-      ],
+      // count: Number(res?.data?.xblockcount || '0x'),
+      xmsgs,
     })
   }
 

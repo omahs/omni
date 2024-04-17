@@ -15,7 +15,19 @@ interface Props {
 }
 
 const RollupIcon: React.FC<Props> = ({ chainId, name }) => {
-  return <img src={Arbiscan} alt="" />
+  let image = Optimism
+  switch (chainId) {
+    case '0x89':
+      image = Polygon
+      break
+    case '0xe708':
+      image = Linea
+      break
+    case '0x82750':
+      image = Scroll
+      break
+  }
+  return <img src={image} alt="" />
 }
 
 export default RollupIcon

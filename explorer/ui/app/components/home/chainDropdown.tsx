@@ -23,7 +23,7 @@ const ChainDropdown: React.FC<Props> = ({
   const hasLabel = label.length > 0
 
   // state
-  const [isOpen, setIsOpen] = React.useState<boolean>(true)
+  const [isOpen, setIsOpen] = React.useState<boolean>(false)
   const [value, setValue] = React.useState<string>(defaultValue)
 
   //   const selectedOption =
