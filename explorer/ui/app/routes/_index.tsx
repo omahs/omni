@@ -4,7 +4,7 @@ import XMsgDataTable from '~/components/home/messageDataTable'
 import Overview from '~/components/home/overview'
 import { json } from '@remix-run/node'
 import { gqlClient } from '~/entry.server'
-import { useRevalidator } from '@remix-run/react'
+import { useFetcher, useRevalidator } from '@remix-run/react'
 import { useInterval } from '~/hooks/useInterval'
 import { xblockcount } from '~/components/queries/block'
 import { xmsgrange } from '~/components/queries/messages'
@@ -18,7 +18,7 @@ export const meta: MetaFunction = () => {
   ]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request, params, context }) => {
   // const res = await gqlClient.query(xblockcount, {})
 
   const [xmsgRes, supportedChainsRes] = await Promise.all([
@@ -47,8 +47,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Index() {
   const revalidator = useRevalidator()
+  const fetcher = useFetcher()
 
   useInterval(() => {
+    // fetcher.load('?foo=blue')
     revalidator.revalidate()
   }, 5000)
 
