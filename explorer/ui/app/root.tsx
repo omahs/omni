@@ -55,7 +55,6 @@ export default function AppWithProviders() {
   useLoaderData<typeof loader>()
 
   const ENV = useEnv()
-
   return (
     <Provider value={gqlClient}>
       <App />

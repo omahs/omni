@@ -12,7 +12,7 @@ export default function Navbar() {
             <Logo />
           </a>
           <a href="/" className="m-auto text-default text-b font-normal">
-            EVM Explorer
+            X Chain Explorer
           </a>
         </div>
 

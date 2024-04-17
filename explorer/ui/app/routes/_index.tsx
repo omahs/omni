@@ -20,7 +20,6 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async ({ request, params, context }) => {
   // const res = await gqlClient.query(xblockcount, {})
-
   const [xmsgRes, supportedChainsRes] = await Promise.all([
     gqlClient.query(xmsgrange, {
       from: '0x' + (0).toString(16),
