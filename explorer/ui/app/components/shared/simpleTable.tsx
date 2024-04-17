@@ -17,6 +17,7 @@ import {
   ChevronDoubleRightIcon,
 } from '@heroicons/react/24/solid'
 import { Button, PageButton } from './button'
+import { Link } from '@remix-run/react'
 
 export default function SimpleTable({ data, columns }: { data: any[]; columns: ColumnDef<any>[] }) {
   const table = useReactTable({
