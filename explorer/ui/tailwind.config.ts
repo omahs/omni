@@ -23,7 +23,7 @@ export default {
         'icon-positive': 'var(--color-icon-primary)',
         'icon-critical': 'var(--color-icon-critical)',
 
-        'border': 'var(--color-border)',
+        'border-default': 'var(--color-border-default)',
         'border-subtle': 'var(--color-border-subtle)',
         'border-disabled': 'var(--color-border-disabled)',
 
@@ -35,6 +35,21 @@ export default {
         'bg-critical': 'var(--color-bg-critical)',
         'bg-subtle': 'var(--color-bg-subtle)',
         'bg-secondary': 'var(--color-bg-secondary)',
+
+        'bg-interactive-default': 'var(--color-bg-interactive-default)',
+        'bg-interactive-hover': 'var(--color-bg-interactive-hover)',
+        'bg-interactive-active': 'var(--color-bg-interactive-active)',
+
+        'bg-hover': 'var(--color-bg-hover)',
+        'bg-active': 'var(--color-bg-active)',
+
+        'bg-input-default': 'var(--color-bg-input-default)',
+        'bg-input-hover': 'var(--color-bg-input-hover)',
+        'bg-input-active': 'var(--color-bg-input-active)',
+
+        'bg-search-default': 'var(--color-bg-search-default)',
+        'bg-search-hover': 'var(--color-bg-search-hover)',
+        'bg-search-active': 'var(--color-bg-search-active)',
       },
     },
   },
@@ -63,7 +78,7 @@ export default {
           '--color-icon-positive': '#2E7B41',
           '--color-icon-critical': '#BB372B',
 
-          '--color-border': '#DCDFE3',
+          '--color-border-default': '#DCDFE3',
           '--color-border-subtle': '#EEEFF0',
           '--color-border-disabled': '#B0B7C3',
 
@@ -75,6 +90,20 @@ export default {
           '--color-bg-critical': '#BB372B26',
           '--color-bg-subtle':'#F7F7F7',
           '--color-bg-secondary':'#FFE316',
+          '--color-bg-hover': '#1023460D',
+          '--color-bg-active': '#1023460D',
+
+          '--color-bg-interactive-default': '#1023460D',
+          '--color-bg-interactive-hover': '#1023460D',
+          '--color-bg-interactive-active': '#1023460D',
+
+          '--color-bg-input-default': '#1023460D',
+          '--color-bg-input-hover': '#1023460D',
+          '--color-bg-input-active': '#1023460D',
+
+          '--color-bg-search-default': '#EEEFF0',
+          '--color-bg-search-hover': '#1023460D',
+          '--color-bg-search-active': '#DCDFE3',
         },
         dark: {
           // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -97,7 +126,7 @@ export default {
           '--color-icon-positive': '#5588E4',
           '--color-icon-critical': '#F6D5D5',
 
-          '--color-border': '#69748B',
+          '--color-border-default': '#69748B',
           '--color-border-subtle': '#394866',
           '--color-border-disabled': '#B0B7C3',
 
@@ -109,6 +138,16 @@ export default {
           '--color-bg-critical': '#BB372B66',
           '--color-bg-subtle':'#FBFBFC1F',
           '--color-bg-secondary':'#FFE316',
+          '--color-bg-hover': '#FBFBFC0D',
+          '--color-bg-active': '#FBFBFC0D',
+
+          '--color-bg-input-default': '#FBFBFC0D',
+          '--color-bg-input-hover': '#FBFBFC0D',
+          '--color-bg-input-active': '#FBFBFC0D',
+
+          '--color-bg-search-default': '#FBFBFC0D',
+          '--color-bg-search-hover': '#1023460D',
+          '--color-bg-search-active': '#DCDFE3',
 
         },
       },

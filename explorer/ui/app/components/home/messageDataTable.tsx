@@ -10,13 +10,51 @@ import RollupIcon from '../shared/rollupIcon'
 import { Link } from '@remix-run/react'
 import LongArrow from '~/assets/images/LongArrow.svg'
 import { loader } from '~/routes/_index'
-
+import SearchBar from '../shared/search'
+import Dropdown from '../shared/dropdown'
+import ChainDropdown from './chainDropdown'
 
 export default function XMsgDataTable() {
   const data = useLoaderData<typeof loader>()
 
-  const rows = data.xmsgs
+  const filterOptions = [
+    { display: 'Source address', value: 'sourceAddress' },
+    {
+      display: 'Source tx hash',
+      value: 'sourceTxHash',
+    },
+    {
+      display: 'Destination address',
+      value: 'destAddress',
+    },
+    {
+      display: 'Destination tx hash',
+      value: 'destTxHash',
+    },
+  ]
 
+  const sourceChainList = [
+    {
+      value: 'arbiscanId',
+      icon: <RollupIcon chainId="arbiscan" />,
+      display: 'Arbiscan',
+    },
+    {
+      value: 'polygonId',
+      icon: <RollupIcon chainId="polygon" />,
+      display: 'Polygon',
+    },
+    {
+      value: 'calderaId',
+      icon: <RollupIcon chainId="caldera" />,
+      display: 'Caldera',
+    },
+  ]
+
+  const [searchValue, setSearchValue] = React.useState<string>('')
+  const [searchPlaceholder, setSearchPlaceholder] = React.useState<string>()
+
+  const rows = data.xmsgs
 
   const columnConfig = {
     canFilter: false,
@@ -122,7 +160,31 @@ export default function XMsgDataTable() {
     <div className="flex-none">
       <div className="flex flex-col">
         <h5 className="text-default mb-4">XMsgs</h5>
-        <div className={''}>filter options</div>
+        <div className={'flex mb-4 gap-2'}>
+          <div className="flex w-full">
+            <Dropdown
+              position="left"
+              options={filterOptions}
+              onChange={value => {
+                setSearchPlaceholder(
+                  `Search by ${(filterOptions.find(option => option.value === value)?.display || filterOptions[0].display).toLowerCase()}`,
+                )
+              }}
+              defaultValue={filterOptions[0].value}
+            />
+            <SearchBar placeholder={searchPlaceholder} />
+          </div>
+          <ChainDropdown
+            placeholder="Select source"
+            label="From"
+            options={sourceChainList}
+          />
+          <ChainDropdown
+            placeholder="Select destination"
+            label="To"
+            options={sourceChainList}
+          />
+        </div>
       </div>
       <div>
         <SimpleTable columns={columns} data={rows} />

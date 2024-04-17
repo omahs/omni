@@ -2,6 +2,7 @@
 @import '@fontsource/manrope/400.css';
 @import '@fontsource/manrope/500.css';
 @import '@fontsource/manrope/700.css';
+@import './assets/icons/css/omni.css';
 
 
 @tailwind base;
@@ -68,9 +69,62 @@
     text-transform: uppercase;
   }
 
+  /* component button */
+  .text-cb-lg {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.125rem;
+    letter-spacing: 0.03125rem;
+  }
+
+  .text-cb-md, .text-cb {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+  }
+
+  .text-cb-sm {
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 0.875rem;
+    letter-spacing: 0.03125rem;
+  }
+
+  .text-cb-xs {
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 0.75rem;
+    letter-spacing: 0.03125rem;
+  }
+
   /* overwriting original class to keep naming conventions consistent */
   .bg-positive {
     @apply bg-bg-positive !important; 
+  }
+
+  .bg-input-default {
+    @apply bg-bg-input-default !important;
+  }
+
+  .bg-input-hover {
+    @apply bg-bg-input-hover !important;
+  }
+
+  .bg-input-active {
+    @apply bg-bg-input-active !important;
+  }
+
+  .bg-search-default {
+    @apply bg-bg-search-default !important;
+  }
+
+  .bg-search-hover {
+    @apply bg-bg-search-hover !important;
+  }
+
+  .bg-search-active {
+    @apply bg-bg-search-active !important;
   }
 
   .text-positive {
@@ -79,6 +133,14 @@
 
   .bg-critical {
     @apply bg-bg-critical !important; 
+  }
+
+  .bg-hover {
+    @apply bg-bg-hover !important;
+  }
+
+  .bg-active {
+    @apply bg-bg-active !important;
   }
 
   .text-critical {
@@ -96,6 +158,8 @@
   .bg-secondary {
     @apply bg-bg-secondary !important; 
   }
+
+  
 
   .text-secondary {
     color: var(--color-text-secondary);
@@ -165,5 +229,17 @@
   }
   .font-black {
       font-variation-settings: 'wght' 900;
+  }
+
+  .border-default {
+    border-color: var(--color-border-default) !important;
+  }
+
+  .border-subtle {
+    border-color: var(--color-border-subtle) !important;
+  }
+
+  .border-disabled {
+    border-color: var(--color-border-disabled) !important;
   }
 }

@@ -66,7 +66,6 @@ export default function Index() {
   const revalidator = useRevalidator()
 
   useInterval(() => {
-    console.log('Revalidating')
     revalidator.revalidate()
   }, 5000)
 
