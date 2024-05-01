@@ -31,6 +31,12 @@ func bindDevnetFundConfig(cmd *cobra.Command, d *devnetFundConfig) {
 	_ = cmd.MarkFlagRequired(flagAddress)
 }
 
+func bindTestnetNewXmsgsConfig(cmd *cobra.Command, cfg *QueryConfig) {
+	const flagAddr = "address"
+	cmd.Flags().StringVar(&cfg.Addr, flagAddr, cfg.Addr, "Address of the source or destination of the xmsgs to fetch")
+	_ = cmd.MarkFlagRequired(flagAddr)
+}
+
 func bindRPCURL(cmd *cobra.Command, rpcURL *string) {
 	const flagRPCURL = "rpc-url"
 	cmd.Flags().StringVar(rpcURL, flagRPCURL, *rpcURL, "URL of the eth-json RPC server")

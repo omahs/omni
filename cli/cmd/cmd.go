@@ -16,6 +16,7 @@ func New() *cobra.Command {
 		newOperatorCmds(),
 		newDeveloperCmds(),
 		newDevnetCmds(),
+		newTestnetCmds(),
 		buildinfo.NewVersionCmd(),
 	)
 }
